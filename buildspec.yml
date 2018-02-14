@@ -7,9 +7,6 @@ phases:
     build:
         commands:
             - npm run build:prod
-
-artifacts:
-    files:
-        - '**/*'
-    base-directory: 'dist'
-discard-paths: yes
+    post_build:
+        commands:
+            - aws s3 cp dist s3://cmnty.club --recursive
